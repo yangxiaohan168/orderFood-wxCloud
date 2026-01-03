@@ -9,37 +9,81 @@
 
 <table>
   <tr>
-    <td width="33.33%">
-      <img src="./miniprogram/images/bg.png" alt="首页" />
-      <br />
-      <div align="center">首页</div>
-    </td>
-    <td width="33.33%">
-      <img src="images/screenshot2.png" alt="点餐页面" />
+    <td width="25%">
+      <img src="./miniprogram/images/githubImg/sy.jpg" alt="点餐页面" />
       <br />
       <div align="center">点餐页面</div>
     </td>
-    <td width="33.33%">
-      <img src="images/screenshot3.png" alt="充值页面" />
+    <td width="25%">
+      <img src="./miniprogram/images/githubImg/hycz.jpg" alt="充值页面" />
       <br />
       <div align="center">充值页面</div>
     </td>
+    <td width="25%">
+      <img src="./miniprogram/images/githubImg/wddd.jpg" alt="我的订单页面" />
+      <br />
+      <div align="center">我的订单页面</div>
+    </td>
+    <td width="25%">
+      <img src="./miniprogram/images/githubImg/grzx.jpg" alt="个人中心页面" />
+      <br />
+      <div align="center">个人中心页面</div>
+    </td>
   </tr>
   <tr>
-    <td width="33.33%">
-      <img src="images/screenshot4.png" alt="订单页面" />
+   <td width="25%">
+      <img src="./miniprogram/images/githubImg/glyjm.jpg" alt="管理员页面" />
       <br />
-      <div align="center">订单页面</div>
+      <div align="center">管理员页面</div>
+   </td>
+   <td width="25%">
+      <img src="./miniprogram/images/githubImg/hy.png" alt="会员页面" />
+      <br />
+      <div align="center">会员页面</div>
     </td>
-    <td width="33.33%">
-      <img src="images/screenshot5.png" alt="个人中心" />
+    <td width="25%">
+      <img src="./miniprogram/images/githubImg/dyjgl.jpg" alt="打印机管理页面" />
       <br />
-      <div align="center">个人中心</div>
+      <div align="center">打印机管理页面</div>
     </td>
-    <td width="33.33%">
-      <img src="images/screenshot6.png" alt="管理后台" />
+    <td width="25%">
+      <img src="./miniprogram/images/githubImg/glydd.jpg" alt="管理员订单页面" />
       <br />
-      <div align="center">管理后台</div>
+      <div align="center">管理员订单页面</div>
+    </td>
+  </tr>
+  <tr>
+   <td width="25%">
+      <img src="./miniprogram/images/githubImg/cztc.jpg" alt="充值套餐设置页面" />
+      <br />
+      <div align="center">充值套餐设置页面</div>
+   </td>
+   <td width="25%">
+      <img src="./miniprogram/images/githubImg/bjcp.jpg" alt="编辑菜品页面" />
+      <br />
+      <div align="center">编辑菜品页面</div>
+    </td>
+    <td width="25%">
+      <img src="./miniprogram/images/githubImg/sczm.jpg" alt="一键生成桌码" />
+      <br />
+      <div align="center">一键生成桌码</div>
+    </td>
+    <td width="25%">
+      <img src="./miniprogram/images/githubImg/zmgl.jpg" alt="桌码管理页面" />
+      <br />
+      <div align="center">桌码管理页面</div>
+    </td>
+  </tr>
+  <tr>
+   <td width="25%">
+      <img src="./miniprogram/images/githubImg/zm.jpg" alt="桌码示例" />
+      <br />
+      <div align="center">桌码示例</div>
+   </td>
+   <td width="25%">
+      <img src="./miniprogram/images/githubImg/xp.jpg" alt="小票示例" />
+      <br />
+      <div align="center">小票示例</div>
     </td>
   </tr>
 </table>
@@ -239,15 +283,12 @@ wx.cloud.init({
 
 如果这个项目对你有帮助，欢迎打赏支持！
 
-<!-- 在这里添加打赏收款码图片，格式如下： -->
-<!-- 
-<div align="center">
-  <img src="images/reward-wechat.png" width="300" alt="微信收款码"/>
-  <img src="images/reward-alipay.png" width="300" alt="支付宝收款码"/>
-</div>
--->
+部署遇到问题的，需要协助可以v：yxh1168888
 
-> 💡 **提示**：请将收款码图片放在 `images` 目录下，然后在上方添加图片链接
+
+<div align="center">
+  <img src="./miniprogram/images/githubImg/skm.png" width="300" alt="微信收款码"/>
+</div>
 
 ---
 
