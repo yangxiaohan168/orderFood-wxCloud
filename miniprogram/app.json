@@ -6,7 +6,6 @@
     "pages/myhome/myhome",
     "pages/settle/settle",
     "pages/admin/admin",
-    "pages/admin/dishCategory/dishCategory",
     "pages/admin/dish/dish",
     "pages/admin/user/user",
     "pages/admin/order/order",
