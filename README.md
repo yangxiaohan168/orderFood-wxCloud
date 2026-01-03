@@ -7,14 +7,42 @@
 
 ## 📸 效果展示
 
-<!-- 在这里添加小程序效果图片，格式如下： -->
-
-![首页](./miniprogram/images/bg.png)
-![点餐页面](images/screenshot2.png)
-![充值页面](images/screenshot3.png)
-![订单页面](images/screenshot4.png)
-![个人中心](images/screenshot5.png)
-![管理后台](images/screenshot6.png)
+<table>
+  <tr>
+    <td width="33.33%">
+      <img src="./miniprogram/images/bg.png" alt="首页" />
+      <br />
+      <div align="center">首页</div>
+    </td>
+    <td width="33.33%">
+      <img src="images/screenshot2.png" alt="点餐页面" />
+      <br />
+      <div align="center">点餐页面</div>
+    </td>
+    <td width="33.33%">
+      <img src="images/screenshot3.png" alt="充值页面" />
+      <br />
+      <div align="center">充值页面</div>
+    </td>
+  </tr>
+  <tr>
+    <td width="33.33%">
+      <img src="images/screenshot4.png" alt="订单页面" />
+      <br />
+      <div align="center">订单页面</div>
+    </td>
+    <td width="33.33%">
+      <img src="images/screenshot5.png" alt="个人中心" />
+      <br />
+      <div align="center">个人中心</div>
+    </td>
+    <td width="33.33%">
+      <img src="images/screenshot6.png" alt="管理后台" />
+      <br />
+      <div align="center">管理后台</div>
+    </td>
+  </tr>
+</table>
 
 
 
