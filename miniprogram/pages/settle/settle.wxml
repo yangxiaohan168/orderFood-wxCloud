@@ -1,0 +1,147 @@
+<!--pages/settle/settle.wxml-->
+<wxs module="priceHelper" src="../../utils/priceHelper.wxs"></wxs>
+<view class="page">
+  <!-- 订单类型选择 -->
+  <view class="section">
+    <view class="order-type-list">
+      <view 
+        class="order-type-item {{orderType === 'dineIn' ? 'active' : ''}}"
+        data-value="dineIn"
+        bind:tap="selectOrderType">
+        堂食
+      </view>
+      <view 
+        class="order-type-item {{orderType === 'takeOut' ? 'active' : ''}}"
+        data-value="takeOut"
+        bind:tap="selectOrderType">
+        打包
+      </view>
+    </view>
+  </view>
+
+  <!-- 桌码输入（无论堂食还是打包都需要） -->
+  <view class="section">
+    <view class="table-code-wrapper">
+      <view class="table-code-display">
+        <text class="table-code-label">桌码号：</text>
+        <text class="table-code-value table-code-bold">{{tableNumber || '请扫描桌码'}}</text>
+      </view>
+      <view class="table-code-actions">
+        <view class="change-table-btn" bind:tap="scanTableCode">换个位置</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单商品列表 -->
+  <view class="section">
+    <view class="section-title-wrapper">
+      <text class="section-title">订单明细</text>
+      <view class="edit-order-btn" bind:tap="editOrder" data-table-number="{{tableNumber}}">
+        修改
+      </view>
+    </view>
+    <view class="goods-list">
+      <view class="goods-item" wx:for="{{orderGoods}}" wx:key="dishId">
+        <image class="goods-image" src="{{item.dishImage}}" mode="aspectFill"></image>
+        <view class="goods-info">
+          <view class="goods-name">{{item.dishName}}</view>
+          <view class="goods-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+            <van-tag 
+              type="danger" 
+              wx:for="{{item.tags}}" 
+              wx:key="index" 
+              wx:for-item="tagVal">
+              {{tagVal}}
+            </van-tag>
+          </view>
+          <text class="miandan-tip" wx:if="{{item.canUseMiandan}}">可参与免单活动</text>
+          <view class="goods-price-count">
+            <text class="goods-price">¥{{item.price}}</text>
+            <text class="goods-count">×{{item.count}}</text>
+          </view>
+        </view>
+        <view class="goods-subtotal">
+          ¥{{item.subtotal}}
+        </view>
+      </view>
+      
+      <van-empty wx:if="{{orderGoods.length === 0}}" description="购物车为空" />
+    </view>
+  </view>
+
+  <!-- 支付方式 -->
+  <view class="section">
+    <view class="section-title">支付方式</view>
+    <view class="pay-method-list">
+      <!-- 免单支付方式（始终显示） -->
+      <view 
+        class="pay-method-item {{payMethod === 'miandan' ? 'active' : ''}} {{miandanCount === 0 ? 'disabled' : ''}}"
+        data-value="miandan"
+        bind:tap="selectPayMethod">
+        <view class="pay-method-content">
+          <view class="pay-method-left">
+            <view class="pay-method-title">免单支付</view>
+            <view class="pay-method-desc">
+              <text wx:if="{{miandanCount > 0}}">您有{{miandanCount}}次免单机会</text>
+              <text wx:else>首次充值满68元送免单</text>
+            </view>
+          </view>
+          <view class="pay-method-radio {{payMethod === 'miandan' ? 'checked' : ''}}">
+            <view class="radio-dot" wx:if="{{payMethod === 'miandan'}}"></view>
+          </view>
+        </view>
+      </view>
+      <!-- 余额支付 -->
+      <view 
+        class="pay-method-item {{payMethod === 'balance' ? 'active' : ''}}"
+        data-value="balance"
+        bind:tap="selectPayMethod">
+        <view class="pay-method-content">
+          <view class="pay-method-left">
+            <view class="pay-method-title">余额支付</view>
+            <view class="pay-method-desc">余额：¥{{priceHelper.formatPrice(userBalance)}}</view>
+          </view>
+          <view class="pay-method-radio {{payMethod === 'balance' ? 'checked' : ''}}">
+            <view class="radio-dot" wx:if="{{payMethod === 'balance'}}"></view>
+          </view>
+        </view>
+      </view>
+      <!-- 微信支付 -->
+      <view 
+        class="pay-method-item {{payMethod === 'wechat' ? 'active' : ''}}"
+        data-value="wechat"
+        bind:tap="selectPayMethod">
+        <view class="pay-method-content">
+          <view class="pay-method-left">
+            <view class="pay-method-title">微信支付</view>
+            <!-- <view class="pay-method-desc"></view> -->
+          </view>
+          <view class="pay-method-radio {{payMethod === 'wechat' ? 'checked' : ''}}">
+            <view class="radio-dot" wx:if="{{payMethod === 'wechat'}}"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部提交按钮 -->
+  <view class="footer">
+    <view class="footer-price">
+      <text class="footer-label">实付：</text>
+      <text class="footer-price-num">¥{{priceHelper.formatPrice(finalPrice)}}</text>
+    </view>
+    <view 
+      class="submit-btn {{submitting || !canSubmit ? 'disabled' : ''}}"
+      bind:tap="submitOrder">
+      <text wx:if="{{submitting}}">提交中...</text>
+      <text wx:else>提交订单</text>
+    </view>
+  </view>
+
+  <!-- 用户信息授权组件 -->
+  <avatar-nickname-modal 
+    showAvaModal="{{showAuthModal}}" 
+    bind:saved="onUserInfoSaved">
+  </avatar-nickname-modal>
+</view>
+

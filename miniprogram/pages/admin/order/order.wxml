@@ -1,0 +1,114 @@
+<!--pages/admin/order/order.wxml-->
+<view class="page">
+  <!-- 筛选栏 -->
+  <view class="filter-bar">
+    <van-tabs active="{{orderType}}" bind:change="onChange" color="#e54d42" swipeable="{{false}}">
+      <van-tab title="全部订单" />
+      <van-tab title="充值订单" />
+      <van-tab title="点餐订单" />
+    </van-tabs>
+    <view class="refresh-bar">
+      <view class="refresh-btn" bindtap="refreshOrders">刷新</view>
+      <text class="refresh-tip">每 10 秒自动刷新</text>
+    </view>
+  </view>
+
+  <!-- 订单列表 -->
+  <view class="order-list">
+    <view class="order-item" wx:for="{{orders}}" wx:key="_id">
+      <!-- 订单头部 -->
+      <view class="order-header">
+        <view class="order-user-info" wx:if="{{item.userAvatar}}">
+          <image class="user-avatar" src="{{item.userAvatar || '/images/my.png'}}" mode="aspectFill"></image>
+          <view class="user-info-text">
+            <view class="user-name">{{item.userNickName || '未设置昵称'}}</view>
+            <view class="user-phone" wx:if="{{item.userPhone}}">{{item.userPhone}}</view>
+          </view>
+        </view>
+        <view class="order-type">
+          <text wx:if="{{item.type === 'recharge'}}">💰 充值订单</text>
+          <text wx:elif="{{item.orderType === 'dineIn'}}">🍽️ 堂食订单</text>
+          <text wx:elif="{{item.orderType === 'takeOut'}}">📦 打包订单</text>
+          <text wx:else>🍽️ 点餐订单</text>
+        </view>
+      </view>
+
+      <!-- 充值订单内容 -->
+      <view class="order-content" wx:if="{{item.type === 'recharge'}}">
+        <view class="recharge-info">
+          <view class="recharge-item">
+            <text class="recharge-label">充值金额：</text>
+            <text class="recharge-value">¥{{item.amount}}</text>
+          </view>
+          <view class="recharge-item">
+            <text class="recharge-label">赠送金额：</text>
+            <text class="recharge-value gift">¥{{item.giveAmount}}</text>
+          </view>
+          <view class="recharge-item">
+            <text class="recharge-label">到账金额：</text>
+            <text class="recharge-value total">¥{{item.totalGet}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 点餐订单内容 -->
+      <view class="order-content" wx:if="{{item.type === 'order'}}">
+        <view class="goods-list">
+          <view class="goods-item" wx:for="{{item.goods}}" wx:for-item="goods" wx:key="goodsId">
+            <image class="goods-image" src="{{goods.dishImage}}" mode="aspectFill"></image>
+            <view class="goods-info">
+              <view class="goods-name">{{goods.dishName}}</view>
+              <!-- 显示标签 -->
+              <view class="goods-tags" wx:if="{{goods.tags && goods.tags.length > 0}}">
+                <!-- <text class="tag-text" wx:for="{{goods.tags}}" wx:key="index" wx:for-item="tagVal">
+                  {{tagVal}}
+                </text> -->
+                <van-tag type="danger" wx:for="{{goods.tags}}" wx:key="index" wx:for-item="tagVal">{{tagVal}}</van-tag>
+              </view>
+              <view class="goods-detail">
+                <text class="goods-price">¥{{goods.price}}</text>
+                <text class="goods-count">x{{goods.count}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 免单标识 -->
+        <view class="miandan-tag" wx:if="{{item.useMiandan}}">
+          <text>🎁 使用免单机会</text>
+        </view>
+      </view>
+
+      <!-- 订单底部 -->
+      <view class="order-footer">
+        <view class="order-info">
+          <view class="order-time">
+            {{item.createTimeText}}
+          </view>
+          <view class="order-table-code" wx:if="{{item.tableNumber}}">
+            桌码：{{item.tableNumber}}
+          </view>
+          <!-- 打印状态 -->
+          <view class="order-print-status">
+            <text class="print-status-text {{item.printStatus === 2 ? 'printed' : item.printStatus === 3 ? 'failed' : item.printStatus === 4 ? 'cancelled' : 'not-printed'}}">
+              {{item.printStatus === 2 ? '✅ 已打印小票' : item.printStatus === 3 ? '❌ 打印失败' : item.printStatus === 4 ? '🚫 打印已取消' : '⏳ 未打印小票'}}
+            </text>
+          </view>
+        </view>
+        <view class="order-actions">
+          <view class="order-price">
+            <text class="price-label">实付：</text>
+            <text class="price-num">¥{{item.type === 'recharge' ? item.amount : item.finalPrice}}</text>
+          </view>
+          <view class="action-btns">
+            <!-- <view class="action-btn delete" bindtap="deleteOrder" data-order="{{item}}" catchtap="stopPropagation">删除</view> -->
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <van-empty wx:if="{{orders.length === 0}}" description="暂无订单数据" />
+  </view>
+
+</view>
+

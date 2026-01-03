@@ -1,0 +1,609 @@
+/* pages/admin/dish/dish.wxss */
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+}
+
+/* ==================== 主内容区 ==================== */
+.main-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ==================== 左侧分类菜单 ==================== */
+.category-sidebar {
+  width: 220rpx;
+  background: white;
+  border-right: 2rpx solid #f0f0f0;
+}
+
+.category-item {
+  position: relative;
+  padding: 35rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.category-item.active {
+  background: linear-gradient(to right, #fff5f5, white);
+}
+
+.category-name {
+  font-size: 26rpx;
+  color: #333;
+  text-align: center;
+  word-break: break-all;
+}
+
+.category-item.active .category-name {
+  color: #e54d42;
+  font-weight: bold;
+}
+
+.category-indicator {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6rpx;
+  height: 40rpx;
+  background: #e54d42;
+  border-radius: 6rpx 0 0 6rpx;
+}
+
+.category-actions {
+  display: flex;
+  gap: 15rpx;
+  margin-top: 10rpx;
+}
+
+.action-icon {
+  font-size: 20rpx;
+  padding: 5rpx;
+}
+
+.add-category-btn {
+  padding: 35rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #e54d42;
+  border-top: 2rpx dashed #e0e0e0;
+}
+
+.add-category-btn .add-icon {
+  font-size: 40rpx;
+  margin-bottom: 10rpx;
+}
+
+.add-category-btn .add-text {
+  font-size: 24rpx;
+}
+
+/* ==================== 右侧菜品内容 ==================== */
+.dish-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+}
+
+.dish-header {
+  background: white;
+  padding: 25rpx 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.header-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.add-dish-btn {
+  padding: 15rpx 30rpx;
+  background: linear-gradient(135deg, #e54d42 0%, #f37370 100%);
+  color: white;
+  border-radius: 50rpx;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.add-dish-btn .add-icon {
+  font-size: 28rpx;
+}
+
+/* ==================== 菜品列表 ==================== */
+.dish-list {
+  flex: 1;
+  padding: 20rpx;
+}
+
+.dish-item {
+  background: white;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  display: flex;
+  gap: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.dish-image {
+  position: relative;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 15rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.dish-image image {
+  width: 100%;
+  height: 100%;
+}
+
+.no-image {
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.dish-status {
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+  color: white;
+}
+
+.dish-status.online {
+  background: #39b54a;
+}
+
+.dish-status.offline {
+  background: #999;
+}
+
+.dish-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dish-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.dish-desc {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.miandan-tip {
+  width:190rpx;
+  font-size: 22rpx;
+  color: #ff6b6b;
+  background: #fff3f0;
+  padding: 6rpx 12rpx;
+  border-radius: 6rpx;
+  display: inline-block;
+  margin-top: 8rpx;
+  margin-bottom: 8rpx;
+  border: 1rpx solid #ffe0e0;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.dish-price {
+  display: flex;
+  align-items: baseline;
+  gap: 10rpx;
+}
+
+.price-current {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #e54d42;
+}
+
+.price-original {
+  font-size: 24rpx;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.dish-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+  justify-content: center;
+}
+
+.action-btn {
+  padding: 12rpx 20rpx;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.action-btn.status {
+  background: #f0f9ff;
+  color: #10aeff;
+  border: 2rpx solid #10aeff;
+}
+
+.action-btn.edit {
+  background: #fff7e6;
+  color: #fa8c16;
+  border: 2rpx solid #fa8c16;
+}
+
+.action-btn.delete {
+  background: #fff1f0;
+  color: #f5222d;
+  border: 2rpx solid #f5222d;
+}
+
+.empty-tip {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.empty-category {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20rpx;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* ==================== 弹窗样式 ==================== */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-dialog {
+  width: 600rpx;
+  max-height: 80vh;
+  background: white;
+  border-radius: 20rpx;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-dialog.large {
+  width: 650rpx;
+}
+
+.modal-dialog.tag-modal {
+  width: 600rpx;
+}
+
+.modal-title {
+  padding: 40rpx 30rpx 20rpx;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.modal-content {
+  flex: 1;
+  padding: 30rpx;
+  overflow-y: auto;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 15rpx;
+  font-weight: bold;
+}
+
+.required-mark {
+  color: #e54d42;
+  margin-left: 4rpx;
+}
+
+.label-tip {
+  font-size: 24rpx;
+  color: #999;
+  font-weight: normal;
+  margin-left: 10rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 10rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 150rpx;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.type-selector {
+  display: flex;
+  gap: 20rpx;
+}
+
+.type-option {
+  flex: 1;
+  height: 80rpx;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #666;
+  background: white;
+  transition: all 0.3s;
+}
+
+.type-option.active {
+  border-color: #e54d42;
+  background: linear-gradient(135deg, #e54d42 0%, #f37370 100%);
+  color: white;
+  font-weight: bold;
+}
+
+.image-upload {
+  width: 200rpx;
+  height: 200rpx;
+  border: 2rpx dashed #e5e5e5;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.image-upload image {
+  width: 100%;
+  height: 100%;
+}
+
+.upload-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+}
+
+.modal-footer {
+  display: flex;
+  border-top: 2rpx solid #e5e5e5;
+  flex-shrink: 0;
+}
+
+.modal-btn {
+  flex: 1;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+}
+
+.modal-btn.cancel {
+  color: #666;
+  border-right: 2rpx solid #e5e5e5;
+}
+
+.modal-btn.confirm {
+  color: #e54d42;
+  font-weight: bold;
+}
+
+/* ==================== 标签管理样式 ==================== */
+.tags-management {
+  margin-top: 10rpx;
+}
+
+.tag-list {
+  margin-bottom: 20rpx;
+}
+
+.tag-card {
+  background: #f9f9f9;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 15rpx;
+}
+
+.tag-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.tag-card-title {
+  display: flex;
+  align-items: center;
+}
+
+.tag-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-right: 10rpx;
+}
+
+.tag-type {
+  font-size: 22rpx;
+  color: white;
+  background: #667eea;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  margin-right: 10rpx;
+}
+
+.tag-required {
+  font-size: 22rpx;
+  color: white;
+  background: #e54d42;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+}
+
+.tag-card-actions {
+  display: flex;
+}
+
+.tag-action-btn {
+  font-size: 24rpx;
+  padding: 8rpx 15rpx;
+  border-radius: 8rpx;
+  margin-left: 10rpx;
+}
+
+.tag-action-btn.edit {
+  background: #fff7e6;
+  color: #fa8c16;
+}
+
+.tag-action-btn.delete {
+  background: #fff1f0;
+  color: #f5222d;
+}
+
+.tag-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.option-item {
+  padding: 8rpx 15rpx;
+  background: white;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.add-tag-btn {
+  padding: 20rpx;
+  border: 2rpx dashed #e54d42;
+  border-radius: 12rpx;
+  text-align: center;
+  color: #e54d42;
+  font-size: 26rpx;
+}
+
+.option-list {
+  margin-bottom: 15rpx;
+}
+
+.option-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15rpx 20rpx;
+  background: #f9f9f9;
+  border-radius: 8rpx;
+  margin-bottom: 10rpx;
+}
+
+.option-text {
+  font-size: 26rpx;
+  color: #333;
+}
+
+.option-delete {
+  font-size: 24rpx;
+  color: #f5222d;
+  padding: 5rpx 15rpx;
+}
+
+.add-option-row {
+  display: flex;
+  gap: 15rpx;
+  align-items: center;
+}
+
+.option-input {
+  flex: 1;
+  height: 70rpx;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 8rpx;
+  padding: 0 15rpx;
+  font-size: 26rpx;
+}
+
+.add-option-btn {
+  padding: 15rpx 30rpx;
+  background: linear-gradient(135deg, #e54d42 0%, #f37370 100%);
+  color: white;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+}

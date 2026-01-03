@@ -1,0 +1,98 @@
+<!--pages/admin/rechargeOptions/rechargeOptions.wxml-->
+<view class="page">
+  <!-- 添加按钮 -->
+  <view class="add-btn" bindtap="showAddModal">
+    <text class="add-icon">+</text>
+    <text>添加充值选项</text>
+  </view>
+
+  <!-- 充值选项列表 -->
+  <view class="option-list">
+    <view class="option-item" wx:for="{{options}}" wx:key="_id">
+      <view class="option-badge" wx:if="{{item.isRecommend}}">🔥 推荐</view>
+      
+      <view class="option-info">
+        <view class="option-amount">
+          <text class="amount-value">¥{{item.amount}}</text>
+          <text class="give-amount" wx:if="{{item.giveAmount > 0}}">+送¥{{item.giveAmount}}</text>
+        </view>
+        
+        <view class="option-total" wx:if="{{item.giveAmount > 0}}">
+          实得：¥{{item.amount + item.giveAmount}}
+        </view>
+        
+        <view class="option-desc" wx:if="{{item.description}}">
+          {{item.description}}
+        </view>
+        
+        <view class="option-meta">
+          <text class="option-status {{item.status === 1 ? 'enabled' : 'disabled'}}">
+            {{item.status === 1 ? '✓ 已启用' : '✗ 已禁用'}}
+          </text>
+        </view>
+      </view>
+      
+      <view class="option-actions">
+        <view class="action-btn edit" bindtap="showEditModal" data-option="{{item}}">编辑</view>
+        <view class="action-btn delete" bindtap="deleteOption" data-option="{{item}}">删除</view>
+      </view>
+    </view>
+
+    <van-empty wx:if="{{options.length === 0}}" description="暂无充值选项" />
+  </view>
+
+  <!-- 编辑弹窗 -->
+  <view class="modal-mask" wx:if="{{showModal}}" catchtap="closeModal">
+    <view class="modal-dialog" catchtap="stopPropagation">
+      <view class="modal-title">{{editMode ? '编辑充值选项' : '添加充值选项'}}</view>
+      <view class="modal-content">
+        <view class="form-item">
+          <view class="form-label">充值金额（元）</view>
+          <input 
+            class="form-input" 
+            type="digit" 
+            placeholder="请输入充值金额" 
+            value="{{currentOption.amount}}"
+            bindinput="onAmountInput"
+          />
+        </view>
+        
+        <view class="form-item">
+          <view class="form-label">赠送金额（元）</view>
+          <input 
+            class="form-input" 
+            type="digit" 
+            placeholder="请输入赠送金额，可为0" 
+            value="{{currentOption.giveAmount}}"
+            bindinput="onGiveAmountInput"
+          />
+        </view>
+        
+        <view class="form-item">
+          <view class="form-label">描述（可选）</view>
+          <input 
+            class="form-input" 
+            placeholder="如：超值优惠" 
+            value="{{currentOption.description}}"
+            bindinput="onDescriptionInput"
+          />
+        </view>
+        
+        <view class="form-item">
+          <view class="form-label">设为推荐</view>
+          <switch checked="{{currentOption.isRecommend}}" bindchange="toggleRecommend" color="#667eea"/>
+        </view>
+
+        <view class="form-item">
+          <view class="form-label">启用状态</view>
+          <switch checked="{{currentOption.status === 1}}" bindchange="toggleStatus" color="#667eea"/>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <view class="modal-btn cancel" bindtap="closeModal">取消</view>
+        <view class="modal-btn confirm" bindtap="saveOption">保存</view>
+      </view>
+    </view>
+  </view>
+</view>
+

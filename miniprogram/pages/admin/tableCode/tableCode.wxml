@@ -1,0 +1,65 @@
+<!--pages/admin/tableCode/tableCode.wxml-->
+<view class="page">
+  <!-- 新建桌码按钮 -->
+  <view class="header-bar">
+    <view class="add-btn" bindtap="showAddModal">
+      <text>+ 新建桌码</text>
+    </view>
+  </view>
+
+  <!-- 桌码列表 -->
+  <view class="table-code-list">
+    <view class="table-code-item" wx:for="{{tableCodeList}}" wx:key="_id">
+      <view class="item-content">
+        <view class="code-info">
+          <view class="code-number">桌码号：{{item.tableNumber}}</view>
+          <view class="code-time">{{item.createTimeText}}</view>
+        </view>
+        <view class="item-actions">
+          <view class="action-btn preview" bindtap="previewPoster" data-item="{{item}}">预览</view>
+          <view class="action-btn download" bindtap="downloadPoster" data-item="{{item}}">下载</view>
+          <view class="action-btn delete" bindtap="deleteTableCode" data-id="{{item._id}}">删除</view>
+        </view>
+      </view>
+    </view>
+
+    <van-empty wx:if="{{tableCodeList.length === 0}}" description="暂无桌码，点击上方按钮创建" />
+  </view>
+
+  <!-- 新建桌码弹窗 -->
+  <view class="modal-mask" wx:if="{{showAddModal}}" catchtap="closeAddModal">
+    <view class="modal-dialog" catchtap="stopPropagation">
+      <view class="modal-title">新建桌码</view>
+      <view class="modal-content">
+        <view class="form-item">
+          <view class="form-label">桌码号</view>
+          <input 
+            class="form-input" 
+            type="number" 
+            placeholder="请输入桌码号" 
+            value="{{newTableNumber}}"
+            bindinput="onTableNumberInput"
+          />
+        </view>
+      </view>
+      <view class="modal-footer">
+        <view class="modal-btn cancel" bindtap="closeAddModal">取消</view>
+        <view class="modal-btn confirm" bindtap="confirmAddTableCode">确认</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- painter组件（隐藏） -->
+  <painter 
+    customStyle="position: absolute; left: -9999rpx;" 
+    customActionStyle="{{customActionStyle}}"
+    dancePalette="{{template}}" 
+    palette="{{paintPallette}}" 
+    bind:imgOK="onImgOK" 
+    bind:touchEnd="touchEnd"
+    action="{{action}}" 
+    use2D="{{true}}" 
+    widthPixels="520" 
+  />
+</view>
+

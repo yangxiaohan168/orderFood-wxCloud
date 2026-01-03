@@ -1,0 +1,114 @@
+<!--pages/myorder/myorder.wxml-->
+<view class="page">
+  <!-- 顶部标签栏 -->
+  <view class="tabs">
+    <view 
+      class="tab-item {{currentTab === index ? 'active' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="index"
+      bindtap="switchTab"
+      data-index="{{index}}">
+      <text class="tab-text">{{item}}</text>
+      <view class="tab-line" wx:if="{{currentTab === index}}"></view>
+    </view>
+  </view>
+
+  <!-- 订单列表 -->
+  <view class="order-list">
+    <view class="order-item" wx:for="{{orderList}}" wx:key="_id">
+      <!-- 订单头部 -->
+      <view class="order-header">
+        <view class="order-user-info" wx:if="{{userInfo}}">
+          <image class="user-avatar" src="{{userInfo.avatarUrl || '/images/my.png'}}" mode="aspectFill"></image>
+          <view class="user-info-text">
+            <view class="user-name">{{userInfo.nickName || '未设置昵称'}}</view>
+            <view class="user-phone" wx:if="{{userInfo.phoneNumber}}">{{userInfo.phoneNumber}}</view>
+          </view>
+        </view>
+        <view class="order-type">
+          <text wx:if="{{item.type === 'recharge'}}">💰 充值订单</text>
+          <text wx:elif="{{item.orderType === 'dineIn'}}">🍽️ 堂食订单</text>
+          <text wx:elif="{{item.orderType === 'takeOut'}}">📦 打包订单</text>
+          <text wx:else>🍽️ 点餐订单</text>
+        </view>
+        <!-- <view class="order-status {{item.status === 3 ? 'cancel' : ''}}">
+          {{item.type === 'recharge' ? '已完成' : (item.status === 0 ? '待确认' : item.status === 1 ? '制作中' : item.status === 2 ? '已完成' : '已取消')}}
+        </view> -->
+      </view>
+
+      <!-- 充值订单内容 -->
+      <view class="order-content" wx:if="{{item.type === 'recharge'}}">
+        <view class="recharge-info">
+          <view class="recharge-item">
+            <text class="recharge-label">充值金额：</text>
+            <text class="recharge-value">¥{{item.amount}}</text>
+          </view>
+          <view class="recharge-item">
+            <text class="recharge-label">赠送金额：</text>
+            <text class="recharge-value gift">¥{{item.giveAmount}}</text>
+          </view>
+          <view class="recharge-item">
+            <text class="recharge-label">到账金额：</text>
+            <text class="recharge-value total">¥{{item.totalGet}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 点餐订单内容 -->
+      <view class="order-content" wx:if="{{item.type === 'order'}}">
+        <view class="goods-list">
+          <view class="goods-item" wx:for="{{item.goods}}" wx:for-item="goods" wx:key="goodsId">
+            <image class="goods-image" src="{{goods.dishImage}}" mode="aspectFill"></image>
+            <view class="goods-info">
+              <view class="goods-name">{{goods.dishName}}</view>
+              <!-- 显示标签 -->
+              <view class="goods-tags" wx:if="{{goods.tags && goods.tags.length > 0}}">
+                <!-- <text class="tag-text" wx:for="{{goods.tags}}" wx:key="index" wx:for-item="tagVal">
+                  {{tagVal}}
+                </text> -->
+                <van-tag type="danger" wx:for="{{goods.tags}}" wx:key="index" wx:for-item="tagVal">{{tagVal}}</van-tag>
+              </view>
+              <view class="goods-detail">
+                <text class="goods-price">¥{{goods.price}}</text>
+                <text class="goods-count">x{{goods.count}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 免单标识 -->
+        <view class="miandan-tag" wx:if="{{item.useMiandan}}">
+          <text>🎁 使用免单机会</text>
+        </view>
+      </view>
+
+      <!-- 订单底部 -->
+      <view class="order-footer">
+        <view class="order-info">
+          <view class="order-time">
+            {{item.createTimeText}}
+          </view>
+          <view class="order-table-code" wx:if="{{item.tableNumber}}">
+            桌码：{{item.tableNumber}}
+          </view>
+        </view>
+        <view class="order-actions">
+          <view class="order-price">
+            <text class="price-label">实付：</text>
+            <text class="price-num">¥{{item.type === 'recharge' ? item.amount : item.finalPrice}}</text>
+          </view>
+          <!-- 当前不需要详情、取消等按钮，保留结构方便后续扩展 -->
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <van-empty wx:if="{{orderList.length === 0}}" description="暂无订单" />
+    
+    <!-- 加载更多提示 -->
+    <!-- <view class="load-more" wx:if="{{orderList.length > 0}}">
+      <text wx:if="{{!orderHasMore && !loadingOrders}}">没有更多了</text>
+      <text wx:if="{{loadingOrders}}">加载中...</text>
+    </view> -->
+  </view>
+</view>

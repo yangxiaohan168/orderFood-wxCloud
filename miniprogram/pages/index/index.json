@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "点餐",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "avatar-nickname-modal": "/components/avatarNicknameModal/avatarNicknameModal"
+  }
+}
+
+

@@ -1,0 +1,165 @@
+/* components/avatarNicknameModal/avatarNicknameModal.wxss */
+.super-page-box {
+	background-color: rgba(51, 51, 51, 0.35);
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	z-index: 103;
+	animation: supermodal 200ms;
+}
+
+@keyframes supermodal{
+	0% {
+		transform: scaleY(0);
+	}
+	50% {
+		transform: scaleY(0.5);
+	}
+	100% {
+		transform: scaleY(1);
+	}
+}
+
+.super-modal-box {
+	position: fixed;
+	z-index: 999;
+	height: 75%;
+	width: 100vw;
+	bottom: 0rpx;
+	left: 0rpx;
+}
+
+.super-modal-body-box {
+	background-color: #ffffff;
+	border-top-left-radius: 30rpx;
+	border-top-right-radius: 30rpx;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.super-modal-title {
+	height: 105rpx;
+	width: 100%;
+	font-size: 30rpx;
+	font-weight: bold;
+	color: #222222;
+	position: relative;
+}
+
+.super-modal-content {
+	flex: 1;
+	overflow-y: auto;
+	padding-bottom: 20rpx;
+}
+
+.super-avatar-box {
+	width: 250rpx;
+	position: relative;
+	margin: auto;
+	margin-top: 25rpx;
+}
+
+.avatar-btn {
+	position: absolute;
+	top: 0rpx;
+	left: 0rpx;
+	height: 100% !important;
+	width: 100% !important;
+	background-color: transparent;
+	z-index: 99;
+}
+
+.avatar-img-box {
+	background-color: #f5f5f5;
+	height: 200rpx;
+	width: 200rpx;
+	border-radius: 20rpx;
+	margin: auto;
+}
+
+.avatar-select-tips {
+	font-size: 24rpx;
+	color: #8a8a8a;
+	margin-top: 15rpx;
+}
+
+.super-nick-name-box {
+	height: 105rpx;
+	padding: 0rpx 25rpx;
+	margin-top: 15rpx;
+	border-bottom: 1rpx solid #f0f0f0;
+}
+
+.nick-name-box {
+	height: 100%;
+	width: 85%;
+}
+.nick-name-input{
+	height: 105rpx;
+}
+
+.super-phone-box {
+	height: 105rpx;
+	padding: 0rpx 25rpx;
+	margin-top: 15rpx;
+}
+
+.phone-label-box {
+	height: 100%;
+	flex: 1;
+}
+
+.phone-display {
+	font-size: 28rpx;
+	color: #999;
+}
+
+.phone-btn {
+	padding: 12rpx 30rpx;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	font-size: 24rpx;
+	border-radius: 50rpx;
+	border: none;
+	line-height: 1.5;
+	width:250rpx !important;
+}
+
+.phone-btn::after {
+	border: none;
+}
+
+.apply-btn {
+	width: 450rpx;
+	height: 95rpx;
+	border-radius: 20rpx;
+	background: linear-gradient(135deg, #e54d42 0%, #f37370 100%);
+	color: #ffffff;
+	font-size: 28rpx;
+	font-weight: bold;
+	margin: 35rpx auto 30rpx;
+	flex-shrink: 0;
+}
+
+.flex-ac,
+.flex-jc-ac,
+.flex-jb-ac {
+	display: flex;
+}
+
+.flex-jc-ac {
+	justify-content: center;
+}
+
+.flex-ac,
+.flex-jc-ac,
+.flex-jb-ac {
+	align-items: center;
+}
+
+.flex-jb-ac {
+	justify-content: space-between;
+}

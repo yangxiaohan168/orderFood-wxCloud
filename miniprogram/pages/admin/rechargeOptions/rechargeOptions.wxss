@@ -1,0 +1,235 @@
+/* pages/admin/rechargeOptions/rechargeOptions.wxss */
+.page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 20rpx;
+  padding-bottom: 40rpx;
+}
+
+/* 添加按钮 */
+.add-btn {
+  margin-bottom: 20rpx;
+  padding: 30rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  box-shadow: 0 8rpx 30rpx rgba(102, 126, 234, 0.3);
+}
+
+.add-icon {
+  font-size: 40rpx;
+  margin-right: 10rpx;
+}
+
+/* 充值选项列表 */
+.option-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.option-item {
+  position: relative;
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.option-badge {
+  position: absolute;
+  top: 0;
+  left: 30rpx;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+  color: white;
+  padding: 8rpx 20rpx;
+  border-radius: 0 0 12rpx 12rpx;
+  font-size: 22rpx;
+  font-weight: bold;
+}
+
+.option-info {
+  flex: 1;
+  margin-top: 10rpx;
+}
+
+.option-amount {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 10rpx;
+}
+
+.amount-value {
+  font-size: 48rpx;
+  color: #e54d42;
+  font-weight: bold;
+  margin-right: 15rpx;
+}
+
+.give-amount {
+  font-size: 28rpx;
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+.option-total {
+  font-size: 26rpx;
+  color: #67c23a;
+  margin-bottom: 8rpx;
+  font-weight: bold;
+}
+
+.option-desc {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.option-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.option-sort {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.option-status {
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+}
+
+.option-status.enabled {
+  background: #e8f5e9;
+  color: #4caf50;
+}
+
+.option-status.disabled {
+  background: #f5f5f5;
+  color: #999;
+}
+
+.option-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+}
+
+.action-btn {
+  padding: 12rpx 30rpx;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.action-btn.edit {
+  background: #667eea;
+  color: white;
+}
+
+.action-btn.delete {
+  background: #f56c6c;
+  color: white;
+}
+
+.empty-tip {
+  padding: 100rpx 0;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+  background: white;
+  border-radius: 20rpx;
+}
+
+/* 弹窗样式 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-dialog {
+  width: 600rpx;
+  background: white;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.modal-title {
+  padding: 40rpx 30rpx 20rpx;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-content {
+  padding: 20rpx 30rpx 40rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 15rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 10rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.modal-footer {
+  display: flex;
+  border-top: 2rpx solid #e5e5e5;
+}
+
+.modal-btn {
+  flex: 1;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+}
+
+.modal-btn.cancel {
+  color: #999;
+  border-right: 2rpx solid #e5e5e5;
+}
+
+.modal-btn.confirm {
+  color: #667eea;
+  font-weight: bold;
+}
+

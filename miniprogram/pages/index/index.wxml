@@ -1,0 +1,226 @@
+<!--pages/index/index.wxml-->
+<wxs module="tagHelper" src="../../utils/tagHelper.wxs"></wxs>
+<view class="page">
+  <!-- 状态栏占位 -->
+  <view class="status-bar" style="height: {{statusBarHeight}}px;"></view>
+  <!-- 店名 -->
+  <view class="shop-header">
+    <text class="shop-name">{{shopInfo.name || '餐饮店'}}</text>
+  </view>
+
+  <!-- 轮播公告 -->
+  <view class="notice-wrapper" wx:if="{{noticeList.length > 0}}">
+    <van-notice-bar 
+      left-icon="volume-o"
+      text="{{noticeText}}"
+      scrollable
+    />
+  </view>
+
+  <!-- 主内容区 -->
+  <view class="main-content">
+    <!-- 左侧分类菜单 -->
+    <scroll-view class="menu-sidebar" scroll-y>
+      <view 
+        class="menu-item {{currentMenuId === item._id ? 'active' : ''}}" 
+        wx:for="{{menuList}}" 
+        wx:key="_id"
+        bindtap="switchMenu"
+        data-id="{{item._id}}">
+        <text class="menu-name">{{item.name}}</text>
+        <view class="menu-indicator" wx:if="{{currentMenuId === item._id}}"></view>
+      </view>
+    </scroll-view>
+
+    <!-- 右侧菜品列表 -->
+    <scroll-view class="goods-list" scroll-y>
+      <view class="goods-item" wx:for="{{goodsList}}" wx:key="_id">
+        <image class="goods-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="goods-info">
+          <view class="goods-name">{{item.name}}</view>
+          <view class="goods-desc" wx:if="{{item.description || item.desc}}">{{item.description || item.desc}}</view>
+          <view class="miandan-tip" wx:if="{{item.canUseMiandan}}">可参与免单活动</view>
+          <view class="goods-footer">
+            <view class="goods-price">
+              <text class="price-symbol">¥</text>
+              <text class="price-num">{{item.price}}</text>
+              <text class="price-original" wx:if="{{item.originalPrice && item.originalPrice > 0}}">¥{{item.originalPrice}}</text>
+            </view>
+            <view class="goods-actions">
+              <view class="action-btn reduce" wx:if="{{item.cartCount > 0}}" bindtap="reduceDishFromCart" data-goods="{{item}}">
+                <text>-</text>
+              </view>
+              <view class="goods-count" wx:if="{{item.cartCount > 0}}">{{item.cartCount}}</view>
+              <view class="action-btn add" bindtap="addDishToCartDirect" data-goods="{{item}}">
+                <text>+</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <van-empty wx:if="{{goodsList.length === 0}}" description="暂无菜品" />
+    </scroll-view>
+  </view>
+
+  <!-- 悬浮购物车 -->
+  <view class="float-cart-wrapper">
+    <view class="float-cart-card">
+      <view class="cart-left" bindtap="toggleCart">
+        <view class="cart-icon-wrapper">
+          <image class="cart-icon" src="/images/shopping.png" mode="aspectFit"></image>
+          <view class="cart-badge" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
+        </view>
+        <view class="cart-info">
+          <view class="cart-price">
+            <text class="price-label">总价：</text>
+            <text class="price-symbol">¥</text>
+            <text class="price-num">{{cartTotalPriceText}}</text>
+          </view>
+          <view class="cart-tip" wx:if="{{tableNumber}}">{{tableNumber}}号桌</view>
+          <view class="cart-tip" wx:else>请微信扫桌码点餐</view>
+        </view>
+      </view>
+      <view class="cart-right">
+        <view class="settle-btn {{cartCount > 0 ? 'active' : ''}}" bindtap="goToSettle">
+          去结算
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 购物车详情弹窗 -->
+  <view class="cart-mask {{showCart ? 'show' : ''}}" bindtap="toggleCart"></view>
+  <view class="cart-detail {{showCart ? 'show' : ''}}">
+    <view class="cart-header">
+      <text class="cart-title">购物车</text>
+      <text class="cart-clear" bindtap="clearCart">清空</text>
+    </view>
+    <scroll-view class="cart-content" scroll-y>
+      <view class="cart-goods-item" wx:for="{{cart}}" wx:for-item="item" wx:key="index">
+        <view class="cart-goods-info">
+          <image class="cart-goods-image" src="{{item.info.image}}" mode="aspectFill"></image>
+          <view class="cart-goods-detail">
+            <view class="cart-goods-name">{{item.info.name}}</view>
+            <view class="cart-goods-tags" wx:if="{{item.tagLabels && item.tagLabels.length > 0}}">
+              <text class="tag-text" wx:for="{{item.tagLabels}}" wx:key="index" wx:for-item="tagVal">
+                {{tagVal}}
+              </text>
+            </view>
+            <view class="cart-goods-price">¥{{item.info.price}} × {{item.count}}</view>
+          </view>
+        </view>
+        <view class="cart-goods-actions">
+          <view class="action-btn reduce" bindtap="reduceFromCart" data-id="{{index}}">
+            <text>-</text>
+          </view>
+          <view class="cart-count">{{item.count}}</view>
+          <view class="action-btn add" bindtap="addToCartFromCart" data-id="{{index}}">
+            <text>+</text>
+          </view>
+        </view>
+      </view>
+      
+      <van-empty wx:if="{{cartCount === 0}}" description="购物车是空的" />
+    </scroll-view>
+    
+    <!-- 购物车底部栏 -->
+    <view class="cart-footer" wx:if="{{cartCount > 0}}">
+      <view class="cart-footer-left">
+        <view class="cart-total-label">合计：</view>
+        <view class="cart-total-price">
+          <text class="price-symbol">¥</text>
+          <text class="price-num">{{cartTotalPriceText}}</text>
+        </view>
+      </view>
+      <view class="cart-footer-right">
+        <view class="cart-settle-btn" bindtap="goToSettle">去结算</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 商品详情弹窗 -->
+  <view class="modal-mask" wx:if="{{showTagModal}}" catchtap="closeTagModal">
+    <view class="modal-dialog dish-detail-modal" catchtap="stopPropagation">
+      <view class="modal-close" bindtap="closeTagModal">×</view>
+      <scroll-view class="modal-content" scroll-y>
+        <!-- 商品信息 -->
+        <view class="dish-detail-header">
+          <image class="dish-detail-image" src="{{currentDish.image}}" mode="aspectFill"></image>
+          <view class="dish-detail-info">
+            <view class="dish-detail-name">{{currentDish.name}}</view>
+            <view class="dish-detail-desc" wx:if="{{currentDish.description}}">{{currentDish.description}}</view>
+            <view class="miandan-tip" wx:if="{{currentDish.canUseMiandan}}">可参与免单活动</view>
+            <view class="dish-detail-price">
+              <text class="price-symbol">¥</text>
+              <text class="price-num">{{currentDish.price}}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 标签选择 -->
+        <view class="tag-section" wx:if="{{currentDish.tags && currentDish.tags.length > 0}}" wx:for="{{currentDish.tags}}" wx:key="id" wx:for-item="tag">
+          <view class="tag-title">
+            {{tag.name}}
+            <text class="tag-type-label">{{tag.type === 'single' ? '(单选)' : '(多选)'}}</text>
+            <text class="tag-required-label" wx:if="{{tag.required}}">必选</text>
+          </view>
+          
+          <!-- 单选 -->
+          <view class="tag-options" wx:if="{{tag.type === 'single'}}">
+            <view 
+              class="tag-option {{selectedTags[tag.id] === option ? 'selected' : ''}}"
+              wx:for="{{tag.options}}"
+              wx:key="index"
+              wx:for-item="option"
+              bindtap="selectTagOption"
+              data-tag-id="{{tag.id}}"
+              data-option="{{option}}">
+              {{option}}
+            </view>
+          </view>
+
+          <!-- 多选 -->
+          <view class="tag-options" wx:if="{{tag.type === 'multiple'}}">
+            <view 
+              wx:for="{{tag.options}}"
+              wx:key="index"
+              wx:for-item="option"
+              class="tag-option {{tagHelper.isTagOptionSelected(selectedTags, tag.id, option) ? 'selected' : ''}}"
+              bindtap="toggleTagOption"
+              data-tag-id="{{tag.id}}"
+              data-option="{{option}}">
+              {{option}}
+            </view>
+          </view>
+        </view>
+
+        <!-- 数量选择 -->
+        <view class="quantity-section">
+          <view class="quantity-label">数量</view>
+          <view class="quantity-controls">
+            <view class="quantity-btn {{modalDishCount <= 1 ? 'disabled' : ''}}" bindtap="decreaseModalCount">-</view>
+            <view class="quantity-num">{{modalDishCount}}</view>
+            <view class="quantity-btn" bindtap="increaseModalCount">+</view>
+          </view>
+        </view>
+      </scroll-view>
+      
+      <!-- 底部按钮 -->
+      <view class="modal-footer-bar">
+        <view class="footer-price">
+          <text class="total-label">小计：</text>
+          <text class="price-symbol">¥</text>
+          <text class="price-num">{{modalTotalPrice}}</text>
+        </view>
+        <view class="add-cart-btn" bindtap="confirmAddToCart">加入购物车</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 用户授权组件 -->
+  <avatar-nickname-modal 
+    showAvaModal="{{showAuthModal}}" 
+    bind:saved="onUserInfoSaved">
+  </avatar-nickname-modal>
+</view>

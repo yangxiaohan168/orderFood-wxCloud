@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "桌码管理",
+  "usingComponents": {
+    "painter": "/components/painter/painter",
+    "van-empty": "/vant/empty/index"
+  }
+}
+
+
+
+

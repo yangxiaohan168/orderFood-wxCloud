@@ -1,0 +1,74 @@
+<!--pages/recharge/recharge.wxml-->
+<view class="page">
+  <!-- 顶部余额卡 -->
+  <view class="member-card">
+    <view class="member-header">
+      <view class="member-balance">
+        <text class="balance-label">账户余额</text>
+        <view class="balance-amount">
+          <text class="balance-symbol">¥</text>
+          <text class="balance-num">{{userInfo.balance || 0}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 充值套餐列表 -->
+  <view class="recharge-section">
+    <view class="section-title">选择充值套餐</view>
+    
+    <view class="recharge-list">
+      <view 
+        class="recharge-item"
+        wx:for="{{rechargeList}}"
+        wx:key="_id">
+        
+        <!-- 满68赠送免单标签 -->
+        <!--
+        <view class="special-tag" wx:if="{{item.amount >= 68}}">
+          <text>首次送免单</text>
+        </view>-->
+        
+        <view class="recharge-content">
+          <view class="recharge-amount">
+            <text class="amount-symbol">¥</text>
+            <text class="amount-num">{{item.amount}}</text>
+          </view>
+          
+          <view class="recharge-gift {{item.giveAmount > 0 ? '' : 'hidden'}}">
+            <text>赠送¥{{item.giveAmount}}</text>
+          </view>
+          
+          <view class="recharge-total">
+            <text>共到账¥{{item.amount + item.giveAmount}}</text>
+          </view>
+        </view>
+
+        <view class="recharge-btn" bindtap="confirmRecharge" data-recharge="{{item}}">
+          立即充值
+        </view>
+      </view>
+    </view>
+
+    <van-empty wx:if="{{rechargeList.length === 0}}" description="暂无充值套餐" />
+  </view>
+
+  <!-- 充值说明 -->
+  <view class="tips-section">
+    <view class="section-title">充值说明</view>
+    <view class="tips-content">
+      <view class="tips-item">1. 充值金额直接到账，可用于点餐消费</view>
+      <view class="tips-item">2. 充值可赠送相应金额</view>
+      <view class="tips-item">3. 首次单笔充值满68元，额外赠送1次免单机会</view>
+      <view class="tips-item">4. 余额不可提现，请根据实际需求充值</view>
+    </view>
+  </view>
+
+  <!-- 用户授权组件 -->
+  <avatar-nickname-modal 
+    showAvaModal="{{showAuthModal}}" 
+    bind:saved="handleUserAuth">
+  </avatar-nickname-modal>
+</view>
+
+

@@ -1,0 +1,18 @@
+/**
+ * 价格格式化工具
+ */
+function formatPrice(price) {
+  if (price === null || price === undefined || price === '') {
+    return '0.00'
+  }
+  var num = parseFloat(price)
+  if (isNaN(num)) {
+    return '0.00'
+  }
+  return num.toFixed(2)
+}
+
+module.exports = {
+  formatPrice: formatPrice
+}
+

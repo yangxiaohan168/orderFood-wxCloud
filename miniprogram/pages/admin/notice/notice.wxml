@@ -1,0 +1,61 @@
+<!--pages/admin/notice/notice.wxml-->
+<view class="page">
+  <!-- 添加按钮 -->
+  <view class="add-btn" bindtap="showAddModal" wx:if="{{notices.length === 0}}">
+    <text class="add-icon">+</text>
+    <text>添加公告</text>
+  </view>
+  
+  <!-- 提示信息 -->
+  <view class="tip-bar" wx:if="{{notices.length > 0}}">
+    <text class="tip-icon">ℹ️</text>
+    <text class="tip-text">系统仅支持设置一条滚动公告</text>
+  </view>
+
+  <!-- 公告列表 -->
+  <view class="notice-list">
+    <view class="notice-item" wx:for="{{notices}}" wx:key="_id">
+      <view class="notice-info">
+        <view class="notice-content">{{item.content}}</view>
+        <view class="notice-meta">
+          <text class="notice-status {{item.status === 1 ? 'enabled' : 'disabled'}}">
+            {{item.status === 1 ? '✓ 启用中' : '✗ 已禁用'}}
+          </text>
+        </view>
+      </view>
+      <view class="notice-actions">
+        <view class="action-btn status" bindtap="toggleStatus" data-notice="{{item}}">
+          {{item.status === 1 ? '禁用' : '启用'}}
+        </view>
+        <view class="action-btn edit" bindtap="showEditModal" data-notice="{{item}}">编辑</view>
+        <view class="action-btn delete" bindtap="deleteNotice" data-notice="{{item}}">删除</view>
+      </view>
+    </view>
+
+    <van-empty wx:if="{{notices.length === 0}}" description="暂无公告，点击上方按钮添加" />
+  </view>
+
+  <!-- 编辑弹窗 -->
+  <view class="modal-mask" wx:if="{{showModal}}" catchtap="closeModal">
+    <view class="modal-dialog" catchtap="stopPropagation">
+      <view class="modal-title">{{editMode ? '编辑公告' : '添加公告'}}</view>
+      <view class="modal-content">
+        <view class="form-item">
+          <view class="form-label">公告内容</view>
+          <textarea 
+            class="form-textarea" 
+            placeholder="请输入公告内容，如：首次充值68，免单一次。充值更有优惠，充得越多送得越多" 
+            value="{{currentNotice.content}}"
+            bindinput="onContentInput"
+            maxlength="200"
+          />
+        </view>
+      </view>
+      <view class="modal-footer">
+        <view class="modal-btn cancel" bindtap="closeModal">取消</view>
+        <view class="modal-btn confirm" bindtap="saveNotice">保存</view>
+      </view>
+    </view>
+  </view>
+</view>
+

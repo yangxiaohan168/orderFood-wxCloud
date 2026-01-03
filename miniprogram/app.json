@@ -1,0 +1,74 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/recharge/recharge",
+    "pages/myorder/myorder",
+    "pages/myhome/myhome",
+    "pages/settle/settle",
+    "pages/admin/admin",
+    "pages/admin/dishCategory/dishCategory",
+    "pages/admin/dish/dish",
+    "pages/admin/user/user",
+    "pages/admin/order/order",
+    "pages/admin/rechargeOptions/rechargeOptions",
+    "pages/admin/notice/notice",
+    "pages/admin/shopInfo/shopInfo",
+    "pages/admin/tableCode/tableCode",
+    "pages/admin/printer/printer"
+  ],
+
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#e54d42",
+    "navigationBarTitleText": "餐饮点餐",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#e54d42",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabBar/buy.png",
+        "selectedIconPath": "images/tabBar/buy-active.png",
+        "text": "点餐"
+      },
+      {
+        "pagePath": "pages/recharge/recharge",
+        "iconPath": "images/tabBar/recharge.png",
+        "selectedIconPath": "images/tabBar/recharge-active.png",
+        "text": "充值"
+      },
+      {
+        "pagePath": "pages/myorder/myorder",
+        "iconPath": "images/tabBar/myOrder.png",
+        "selectedIconPath": "images/tabBar/myOrder-active.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/myhome/myhome",
+        "iconPath": "images/tabBar/me.png",
+        "selectedIconPath": "images/tabBar/me-active.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-notice-bar": "/vant/notice-bar/index",
+    "van-search": "/vant/search/index",
+    "van-dropdown-menu": "/vant/dropdown-menu/index",
+    "van-dropdown-item": "/vant/dropdown-item/index",
+    "van-cell": "/vant/cell/index",
+    "van-cell-group": "/vant/cell-group/index",
+    "van-grid": "/vant/grid/index",
+    "van-grid-item": "/vant/grid-item/index",
+    "van-tabs": "/vant/tabs/index",
+    "van-tab": "/vant/tab/index",
+    "van-tag": "/vant/tag/index",
+    "van-empty": "/vant/empty/index"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

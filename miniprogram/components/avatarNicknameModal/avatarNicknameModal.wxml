@@ -1,0 +1,48 @@
+<!--components/avatarNicknameModal/avatarNicknameModal.wxml-->
+<view class="super-page-box" catchtouchmove="catchtouchmove" wx:if="{{showAvaModal}}">
+
+	<view class="super-modal-box">
+
+		<view class="super-modal-body-box">
+			<view class="super-modal-title flex-jc-ac">
+				完善个人信息
+				<image src="./image/close.png" mode="widthFix" bindtap="closeModalTap" style="position: absolute; top: 10rpx; right: 20rpx; height: 55rpx; width: 55rpx;"></image>
+			</view>
+
+	
+				<view class="super-avatar-box">
+					<button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="chooseavatar"></button>
+					<view class="avatar-img-box flex-jc-ac">
+						<image wx:if="{{avatarUrl}}" src="{{avatarUrl}}" mode="scaleToFill" style="height: 175rpx; width: 175rpx; border-radius: 20rpx;"></image>
+						<image wx:else src="./image/moren.png" mode="widthFix" style="height: 105rpx; width: 105rpx;"></image>
+					</view>
+					<view class="avatar-select-tips flex-jc-ac">点击获取头像</view>
+				</view>
+
+				<view class="super-nick-name-box flex-jb-ac">
+					<view class="nick-name-box flex-ac">
+						<view style="font-size: 28rpx; color: #222; width: 150rpx;">昵称</view>
+						<input class="nick-name-input" placeholder="点击获取您的昵称" type="nickname" value="{{nickName}}" bindblur="bindblur"></input>
+					</view>
+					<view class="flex-jc-ac">
+						<image src="./image/arrow.png" mode="widthFix" style="height: 45rpx; width: 45rpx;"></image>
+					</view>
+				</view>
+
+				<view class="super-phone-box flex-jb-ac">
+					<view class="phone-label-box flex-ac">
+						<view style="font-size: 28rpx; color: #222; width: 150rpx;">手机号</view>
+						<view class="phone-display">{{phoneNumber || '未获取'}}</view>
+					</view>
+					<button class="phone-btn" open-type="getPhoneNumber" bindgetphonenumber="getphonenumber">
+						{{phoneNumber ? '重新获取' : '获取手机号'}}
+					</button>
+				</view>
+
+
+			<view class="apply-btn flex-jc-ac" bindtap="saveUserInfo">保存</view>
+		</view>
+
+	</view>
+
+</view>

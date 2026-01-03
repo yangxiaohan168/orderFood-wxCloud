@@ -1,0 +1,112 @@
+<!--pages/admin/admin.wxml-->
+<view class="page">
+
+
+  <!-- 管理菜单 -->
+  <view class="menu-section">
+    <view class="section-title">数据管理</view>
+    <van-grid column-num="3" border="{{false}}" icon-size="56rpx" custom-class="menu-grid">
+      <van-grid-item 
+        icon="shop-o" 
+        icon-color="#e54d42"
+        text="菜品管理" 
+        bind:click="goToDish"
+      />
+      <van-grid-item 
+        icon="friends-o" 
+        icon-color="#1989fa"
+        text="会员管理" 
+        bind:click="goToUser"
+      />
+      <van-grid-item 
+        icon="orders-o" 
+        icon-color="#07c160"
+        text="订单管理" 
+        bind:click="goToOrder"
+      />
+      <van-grid-item 
+        icon="credit-pay" 
+        icon-color="#ff976a"
+        text="充值选项管理" 
+        bind:click="goToRechargeOptions"
+      />
+      <van-grid-item 
+        icon="volume-o" 
+        icon-color="#ffd700"
+        text="公告管理" 
+        bind:click="goToNotice"
+      />
+      <van-grid-item 
+        icon="qr-invalid" 
+        icon-color="#38b2ac"
+        text="桌码管理" 
+        bind:click="goToTableCode"
+      />
+    </van-grid>
+  </view>
+
+  <!-- 系统设置 -->
+  <view class="menu-section">
+    <view class="section-title">系统设置</view>
+    <van-grid column-num="3" border="{{false}}" icon-size="56rpx" custom-class="menu-grid">
+      <van-grid-item 
+        icon="shop-collect-o" 
+        icon-color="#7232dd"
+        text="店铺设置" 
+        bind:click="goToShopInfo"
+      />
+      <van-grid-item 
+        icon="lock" 
+        icon-color="#646566"
+        text="修改密码" 
+        bind:click="showChangePassword"
+      />
+      <van-grid-item 
+        icon="printer" 
+        icon-color="#ff9800"
+        text="打印机管理" 
+        bind:click="goToPrinter"
+      />
+    </van-grid>
+  </view>
+
+  <!-- 返回按钮 -->
+  <view class="back-btn" bindtap="goBack">
+    <text>返回</text>
+  </view>
+
+  <!-- 修改密码弹窗 -->
+  <view class="modal-mask" wx:if="{{showPasswordModal}}" catchtap="closePasswordModal">
+    <view class="modal-dialog" catchtap="stopPropagation">
+      <view class="modal-title">修改密码</view>
+      <view class="modal-content">
+        <input 
+          class="password-input" 
+          type="password" 
+          placeholder="请输入原密码" 
+          value="{{oldPassword}}"
+          bindinput="onOldPasswordInput"
+        />
+        <input 
+          class="password-input" 
+          type="password" 
+          placeholder="请输入新密码（至少6位）" 
+          value="{{newPassword}}"
+          bindinput="onNewPasswordInput"
+        />
+        <input 
+          class="password-input" 
+          type="password" 
+          placeholder="请再次输入新密码" 
+          value="{{confirmPassword}}"
+          bindinput="onConfirmPasswordInput"
+        />
+      </view>
+      <view class="modal-footer">
+        <view class="modal-btn cancel" bindtap="closePasswordModal">取消</view>
+        <view class="modal-btn confirm" bindtap="confirmChangePassword">确认</view>
+      </view>
+    </view>
+  </view>
+</view>
+

@@ -1,0 +1,36 @@
+// utils/tagHelper.wxs
+// 检查多选标签选项是否被选中
+function isTagOptionSelected(selectedTags, tagId, option) {
+  if (!selectedTags || !tagId || !option) {
+    return false
+  }
+  
+  var tagArray = selectedTags[tagId]
+  if (!tagArray) {
+    return false
+  }
+  
+  // 检查是否有length属性（数组特征）
+  if (tagArray.length === undefined || tagArray.length === null) {
+    // 如果不是数组，可能是字符串，转为数组
+    tagArray = [tagArray]
+  }
+  
+  if (tagArray.length === 0) {
+    return false
+  }
+  
+  // 检查数组中是否包含该选项
+  for (var i = 0; i < tagArray.length; i++) {
+    if (tagArray[i] === option) {
+      return true
+    }
+  }
+  
+  return false
+}
+
+module.exports = {
+  isTagOptionSelected: isTagOptionSelected
+}
+

@@ -1,0 +1,88 @@
+/**app.wxss**/
+@import './components/colorui/animation.wxss';
+@import './components/colorui/icon.wxss';
+@import './components/colorui/main.wxss';
+
+/* 全局红色主题样式 */
+page {
+  --theme-color: #e54d42;
+  --theme-gradient: linear-gradient(135deg, #e54d42 0%, #f37370 100%);
+  background-color: #f5f5f5;
+}
+
+.container {
+  padding: 20rpx;
+}
+
+/* 主题按钮 */
+.btn-theme {
+  background: linear-gradient(135deg, #e54d42 0%, #f37370 100%);
+  color: white;
+  border: none;
+  border-radius: 50rpx;
+  padding: 20rpx 40rpx;
+}
+
+.btn-theme-plain {
+  background: white;
+  color: #e54d42;
+  border: 2rpx solid #e54d42;
+  border-radius: 50rpx;
+  padding: 20rpx 40rpx;
+}
+
+/* 卡片样式 */
+.card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.05);
+}
+
+/* 标签 */
+.tag-red {
+  background: #e54d42;
+  color: white;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+}
+
+/* 价格样式 */
+.price {
+  color: #e54d42;
+  font-weight: bold;
+}
+
+.price-symbol {
+  font-size: 24rpx;
+}
+
+.price-num {
+  font-size: 36rpx;
+}
+
+/* 徽章 */
+.badge {
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  background: #e54d42;
+  color: white;
+  border-radius: 50%;
+  min-width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+  font-size: 20rpx;
+  padding: 0 8rpx;
+}
+
+/* 分割线 */
+.divider {
+  height: 1rpx;
+  background: #f0f0f0;
+  margin: 20rpx 0;
+}
+

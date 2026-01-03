@@ -1,0 +1,271 @@
+/* pages/admin/printer/printer.wxss */
+.page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 20rpx;
+  padding-bottom: 40rpx;
+}
+
+/* 打印机信息卡片 */
+.printer-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.printer-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.printer-status {
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.printer-status.online {
+  background: rgba(7, 193, 96, 0.1);
+  color: #07c160;
+}
+
+.printer-status.offline {
+  background: rgba(153, 153, 153, 0.1);
+  color: #999;
+}
+
+.card-content {
+  margin-bottom: 30rpx;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  color: #666;
+  min-width: 160rpx;
+}
+
+.info-value {
+  color: #333;
+  font-weight: 500;
+}
+
+.card-actions {
+  display: flex;
+  gap: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f5f5f5;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.action-btn.test {
+  background: linear-gradient(135deg, #07c160 0%, #39b54a 100%);
+  color: white;
+}
+
+.action-btn.query {
+  background: linear-gradient(135deg, #1989fa 0%, #2d8cf0 100%);
+  color: white;
+}
+
+.action-btn.delete {
+  background: rgba(245, 108, 108, 0.1);
+  color: #f56c6c;
+  border: 1rpx solid #f56c6c;
+}
+
+/* 空状态 */
+.empty-state {
+  background: white;
+  border-radius: 20rpx;
+  padding: 100rpx 40rpx;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #999;
+  margin-bottom: 40rpx;
+}
+
+.bind-btn {
+  display: inline-block;
+  padding: 24rpx 60rpx;
+  background: linear-gradient(135deg, #ff9800 0%, #ff6d00 100%);
+  color: white;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+/* 设置区域 */
+.settings-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.setting-item {
+  margin-bottom: 40rpx;
+}
+
+.setting-item:last-child {
+  margin-bottom: 0;
+}
+
+.setting-label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  font-weight: 500;
+}
+
+.setting-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15rpx;
+}
+
+.option-btn {
+  padding: 16rpx 32rpx;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 50rpx;
+  font-size: 26rpx;
+  color: #666;
+  background: white;
+  transition: all 0.3s;
+}
+
+.option-btn.active {
+  background: linear-gradient(135deg, #ff9800 0%, #ff6d00 100%);
+  color: white;
+  border-color: transparent;
+}
+
+/* 弹窗样式 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-dialog {
+  width: 600rpx;
+  background: white;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.modal-title {
+  padding: 40rpx 30rpx 20rpx;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-content {
+  padding: 20rpx 30rpx 40rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 15rpx;
+  display: block;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 10rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.modal-footer {
+  display: flex;
+  border-top: 2rpx solid #e5e5e5;
+}
+
+.modal-btn {
+  flex: 1;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+}
+
+.modal-btn.cancel {
+  color: #999;
+  border-right: 2rpx solid #e5e5e5;
+}
+
+.modal-btn.confirm {
+  color: #ff9800;
+  font-weight: bold;
+}
+

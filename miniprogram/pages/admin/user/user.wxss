@@ -1,0 +1,282 @@
+/* pages/admin/user/user.wxss */
+.page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 20rpx;
+  padding-bottom: 40rpx;
+}
+
+/* 搜索栏 */
+.search-bar {
+  display: flex;
+  margin-bottom: 20rpx;
+  gap: 15rpx;
+}
+
+.search-input {
+  flex: 1;
+  height: 70rpx;
+  background: white;
+  border-radius: 10rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+
+.search-btn,
+.clear-btn {
+  padding: 0 30rpx;
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  color: white;
+}
+
+.search-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.clear-btn {
+  background: #999;
+}
+
+/* 用户列表 */
+.user-list {
+  background: white;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.user-item {
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.user-item:last-child {
+  border-bottom: none;
+}
+
+.user-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.user-avatar image {
+  width: 100%;
+  height: 100%;
+}
+
+.default-avatar {
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+  display: flex;
+  align-items: center;
+}
+
+.member-badge {
+  font-size: 28rpx;
+  margin-left: 10rpx;
+}
+
+.user-detail {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 5rpx;
+}
+
+.user-detail:last-child {
+  margin-bottom: 0;
+}
+
+.user-arrow {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.user-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  margin-left: 20rpx;
+}
+
+.action-btn {
+  padding: 8rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.balance-btn {
+  background: #667eea;
+  color: white;
+}
+
+.miandan-btn {
+  background: #e54d42;
+  color: white;
+}
+
+.empty-tip {
+  padding: 100rpx 0;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 弹窗样式 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-dialog {
+  width: 600rpx;
+  background: white;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.modal-title {
+  padding: 40rpx 30rpx 20rpx;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-content {
+  padding: 20rpx 30rpx 40rpx;
+}
+
+.user-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding-bottom: 30rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.preview-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+
+.preview-avatar image {
+  width: 100%;
+  height: 100%;
+}
+
+.preview-name {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 15rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 10rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.balance-edit {
+  display: flex;
+  gap: 15rpx;
+}
+
+.balance-edit .form-input {
+  flex: 1;
+}
+
+.recharge-btn {
+  padding: 0 30rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #67c23a;
+  color: white;
+  border-radius: 10rpx;
+  font-size: 26rpx;
+  white-space: nowrap;
+}
+
+.modal-footer {
+  display: flex;
+  border-top: 2rpx solid #e5e5e5;
+}
+
+.modal-btn {
+  flex: 1;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+}
+
+.modal-btn.cancel {
+  color: #999;
+  border-right: 2rpx solid #e5e5e5;
+}
+
+.modal-btn.confirm {
+  color: #667eea;
+  font-weight: bold;
+}
+

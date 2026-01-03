@@ -1,0 +1,69 @@
+<!--pages/admin/dishCategory/dishCategory.wxml-->
+<view class="page">
+  <!-- 添加按钮 -->
+  <view class="add-btn" bindtap="showAddModal">
+    <text class="add-icon">+</text>
+    <text>添加分类</text>
+  </view>
+
+  <!-- 分类列表 -->
+  <view class="category-list">
+    <view class="category-item" wx:for="{{categories}}" wx:key="_id">
+      <view class="category-info">
+        <view class="category-icon">{{item.icon}}</view>
+        <view class="category-detail">
+          <view class="category-name">{{item.name}}</view>
+          <view class="category-sort">排序: {{item.sort}}</view>
+        </view>
+      </view>
+      <view class="category-actions">
+        <view class="action-btn edit" bindtap="showEditModal" data-category="{{item}}">编辑</view>
+        <view class="action-btn delete" bindtap="deleteCategory" data-category="{{item}}">删除</view>
+      </view>
+    </view>
+
+    <van-empty wx:if="{{categories.length === 0}}" description="暂无分类，点击上方按钮添加" />
+  </view>
+
+  <!-- 编辑弹窗 -->
+  <view class="modal-mask" wx:if="{{showModal}}" catchtap="closeModal">
+    <view class="modal-dialog" catchtap="stopPropagation">
+      <view class="modal-title">{{editMode ? '编辑分类' : '添加分类'}}</view>
+      <view class="modal-content">
+        <view class="form-item">
+          <view class="form-label">分类名称</view>
+          <input 
+            class="form-input" 
+            placeholder="请输入分类名称" 
+            value="{{currentCategory.name}}"
+            bindinput="onNameInput"
+          />
+        </view>
+        <view class="form-item">
+          <view class="form-label">图标</view>
+          <input 
+            class="form-input" 
+            placeholder="请输入emoji图标" 
+            value="{{currentCategory.icon}}"
+            bindinput="onIconInput"
+          />
+        </view>
+        <view class="form-item">
+          <view class="form-label">排序</view>
+          <input 
+            class="form-input" 
+            type="number" 
+            placeholder="数字越小越靠前" 
+            value="{{currentCategory.sort}}"
+            bindinput="onSortInput"
+          />
+        </view>
+      </view>
+      <view class="modal-footer">
+        <view class="modal-btn cancel" bindtap="closeModal">取消</view>
+        <view class="modal-btn confirm" bindtap="saveCategory">保存</view>
+      </view>
+    </view>
+  </view>
+</view>
+

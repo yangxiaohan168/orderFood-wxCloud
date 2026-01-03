@@ -1,0 +1,296 @@
+/* pages/recharge/recharge.wxss */
+.page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 120rpx;
+}
+
+/* 会员卡 */
+.member-card {
+  margin: 20rpx;
+  padding: 40rpx 30rpx;
+  background: linear-gradient(135deg, #e54d42 0%, #f37370 100%);
+  border-radius: 20rpx;
+  box-shadow: 0 8rpx 30rpx rgba(229, 77, 66, 0.3);
+}
+
+.member-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30rpx;
+}
+
+.member-title {
+  display: flex;
+  align-items: center;
+}
+
+.member-label {
+  color: white;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-right: 10rpx;
+}
+
+.member-icon {
+  font-size: 32rpx;
+}
+
+.member-balance {
+  text-align: right;
+}
+
+.balance-label {
+  color: rgba(255,255,255,0.8);
+  font-size: 24rpx;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.balance-amount {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+}
+
+.balance-symbol {
+  color: white;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.balance-num {
+  color: white;
+  font-size: 48rpx;
+  font-weight: bold;
+}
+
+.member-tips {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20rpx;
+  border-top: 1rpx solid rgba(255,255,255,0.2);
+}
+
+.tip-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tip-icon {
+  font-size: 32rpx;
+  margin-bottom: 8rpx;
+}
+
+.tip-text {
+  color: white;
+  font-size: 22rpx;
+}
+
+/* 充值套餐 */
+.recharge-section {
+  margin: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.recharge-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.recharge-item {
+  position: relative;
+  width: 48%;
+  background: white;
+  border-radius: 16rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  border: 3rpx solid transparent;
+  transition: all 0.3s;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+}
+
+.recharge-item.selected {
+  border-color: #e54d42;
+  box-shadow: 0 4rpx 20rpx rgba(229, 77, 66, 0.3);
+}
+
+.special-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+  color: white;
+  padding: 4rpx 16rpx;
+  border-radius: 0 16rpx 0 16rpx;
+  font-size: 20rpx;
+  z-index: 2;
+}
+
+.recharge-content {
+  padding: 30rpx 20rpx 20rpx;
+  text-align: center;
+}
+
+.recharge-amount {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 10rpx;
+}
+
+.amount-symbol {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.amount-num {
+  font-size: 56rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.recharge-gift {
+  background: linear-gradient(135deg, #e54d42 0%, #f37370 100%);
+  color: white;
+  padding: 6rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  display: inline-block;
+  margin-bottom: 10rpx;
+  min-height: 36rpx;
+  box-sizing: border-box;
+}
+
+.recharge-gift.hidden {
+  visibility: hidden;
+}
+
+.recharge-total {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.selected-icon {
+  position: absolute;
+  bottom: 10rpx;
+  right: 10rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background: #e54d42;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+}
+
+/* 充值说明 */
+.tips-section {
+  margin: 20rpx;
+  padding: 30rpx;
+  background: white;
+  border-radius: 16rpx;
+}
+
+.tips-content {
+  margin-top: 20rpx;
+}
+
+.tips-item {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 2;
+  position: relative;
+  padding-left: 20rpx;
+}
+
+.tips-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8rpx;
+  height: 8rpx;
+  background: #e54d42;
+  border-radius: 50%;
+}
+
+/* 底部充值按钮 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 20rpx 30rpx;
+  border-top: 1rpx solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  box-shadow: 0 -4rpx 20rpx rgba(0,0,0,0.05);
+}
+
+.bottom-info {
+  flex: 1;
+}
+
+.bottom-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 4rpx;
+}
+
+.bottom-price {
+  display: flex;
+  align-items: baseline;
+}
+
+.price-symbol {
+  color: #e54d42;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.price-num {
+  color: #e54d42;
+  font-size: 44rpx;
+  font-weight: bold;
+}
+
+.recharge-btn {
+  width: 100%;
+  padding: 24rpx 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 28rpx;
+  font-weight: bold;
+  text-align: center;
+  border-top: 1rpx solid #f0f0f0;
+  transition: all 0.3s;
+}
+
+.recharge-btn:active {
+  opacity: 0.8;
+}
+
+.empty-tip {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}
+
+

@@ -1,0 +1,16 @@
+{
+  "navigationBarTitleText": "订单结算",
+  "usingComponents": {
+    "van-cell": "/vant/cell/index",
+    "van-cell-group": "/vant/cell-group/index",
+    "van-radio-group": "/vant/radio-group/index",
+    "van-radio": "/vant/radio/index",
+    "van-button": "/vant/button/index",
+    "van-empty": "/vant/empty/index",
+    "van-tag": "/vant/tag/index",
+    "avatar-nickname-modal": "/components/avatarNicknameModal/avatarNicknameModal"
+  }
+}
+
+
+

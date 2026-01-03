@@ -1,0 +1,279 @@
+<!--pages/admin/dish/dish.wxml-->
+<view class="page">
+  <!-- 主内容区 -->
+  <view class="main-content">
+    <!-- 左侧分类菜单 -->
+    <scroll-view class="category-sidebar" scroll-y>
+      <view 
+        class="category-item {{currentCategoryId === item._id ? 'active' : ''}}" 
+        wx:for="{{categories}}" 
+        wx:key="_id"
+        bindtap="switchCategory"
+        data-id="{{item._id}}">
+        <text class="category-name">{{item.name}}</text>
+        <view class="category-indicator" wx:if="{{currentCategoryId === item._id}}"></view>
+        <!-- 长按编辑/删除 -->
+        <view class="category-actions">
+          <text class="action-icon edit" catchtap="showEditCategoryModal" data-category="{{item}}">编辑</text>
+          <text class="action-icon delete" catchtap="deleteCategory" data-category="{{item}}">删除</text>
+        </view>
+      </view>
+      
+      <!-- 添加分类按钮 -->
+      <view class="add-category-btn" bindtap="showAddCategoryModal">
+        <text class="add-icon">+</text>
+        <text class="add-text">添加分类</text>
+      </view>
+    </scroll-view>
+
+    <!-- 右侧菜品列表 -->
+    <view class="dish-content">
+      <!-- 顶部操作栏 -->
+      <view class="dish-header">
+        <view class="header-title">
+          {{currentCategoryId ? '菜品管理' : '请选择分类'}}
+        </view>
+        <view class="add-dish-btn" bindtap="showAddDishModal" wx:if="{{currentCategoryId}}">
+          <text class="add-icon">+</text>
+          <text>添加菜品</text>
+        </view>
+      </view>
+
+      <!-- 菜品列表 -->
+      <scroll-view class="dish-list" scroll-y wx:if="{{currentCategoryId}}">
+        <view class="dish-item" wx:for="{{dishes}}" wx:key="_id">
+          <view class="dish-image">
+            <image wx:if="{{item.image}}" src="{{item.image}}" mode="aspectFill"></image>
+            <view wx:else class="no-image">暂无图片</view>
+            <view class="dish-status {{item.status === 1 ? 'online' : 'offline'}}">
+              {{item.status === 1 ? '已上架' : '已下架'}}
+            </view>
+          </view>
+          <view class="dish-info">
+            <view class="dish-name">{{item.name}}</view>
+            <view class="dish-desc">{{item.description || '暂无描述'}}</view>
+            <text class="miandan-tip" wx:if="{{item.canUseMiandan === true}}">可参与免单活动</text>
+            <view class="dish-price">
+              <text class="price-current">¥{{item.price}}</text>
+              <text class="price-original" wx:if="{{item.originalPrice > 0}}">¥{{item.originalPrice}}</text>
+            </view>
+          </view>
+          <view class="dish-actions">
+            <view class="action-btn status" bindtap="toggleDishStatus" data-dish="{{item}}">
+              {{item.status === 1 ? '下架' : '上架'}}
+            </view>
+            <view class="action-btn edit" bindtap="showEditDishModal" data-dish="{{item}}">编辑</view>
+            <view class="action-btn delete" bindtap="deleteDish" data-dish="{{item}}">删除</view>
+          </view>
+        </view>
+
+        <van-empty wx:if="{{dishes.length === 0}}" description="暂无菜品，点击右上角添加" />
+      </scroll-view>
+
+      <!-- 未选择分类提示 -->
+      <view class="empty-category" wx:if="{{!currentCategoryId}}">
+        <text class="empty-icon">📋</text>
+        <text class="empty-text">请先在左侧选择或添加分类</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分类编辑弹窗 -->
+  <view class="modal-mask" wx:if="{{showCategoryModal}}" catchtap="closeCategoryModal">
+    <view class="modal-dialog" catchtap="stopPropagation">
+      <view class="modal-title">{{editCategoryMode ? '编辑分类' : '添加分类'}}</view>
+      <view class="modal-content">
+        <view class="form-item">
+          <view class="form-label">分类名称</view>
+          <input 
+            class="form-input" 
+            placeholder="请输入分类名称" 
+            value="{{currentCategory.name}}"
+            bindinput="onCategoryNameInput"
+          />
+        </view>
+        <view class="form-item">
+          <view class="form-label">排序</view>
+          <input 
+            class="form-input" 
+            type="number" 
+            placeholder="数字越小越靠前" 
+            value="{{currentCategory.sort}}"
+            bindinput="onCategorySortInput"
+          />
+        </view>
+      </view>
+      <view class="modal-footer">
+        <view class="modal-btn cancel" bindtap="closeCategoryModal">取消</view>
+        <view class="modal-btn confirm" bindtap="saveCategory">保存</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 菜品编辑弹窗 -->
+  <view class="modal-mask" wx:if="{{showDishModal}}" catchtap="closeDishModal">
+    <view class="modal-dialog large" catchtap="stopPropagation">
+      <view class="modal-title">{{editDishMode ? '编辑菜品' : '添加菜品'}}</view>
+      <scroll-view class="modal-content" scroll-y>
+        <view class="form-item">
+          <view class="form-label">菜品名称<text class="required-mark">*</text></view>
+          <input 
+            class="form-input" 
+            placeholder="请输入菜品名称（最多10个字）" 
+            maxlength="10"
+            value="{{currentDish.name}}"
+            bindinput="onDishNameInput"
+          />
+        </view>
+        <view class="form-item">
+          <view class="form-label">菜品图片<text class="required-mark">*</text></view>
+          <view class="image-upload" bindtap="chooseDishImage">
+            <image wx:if="{{currentDish.image}}" src="{{currentDish.image}}" mode="aspectFill"></image>
+            <view wx:else class="upload-placeholder">点击上传图片</view>
+          </view>
+        </view>
+        <view class="form-item">
+          <view class="form-label">售价<text class="required-mark">*</text></view>
+          <input 
+            class="form-input" 
+            type="digit" 
+            placeholder="请输入售价（0-10000）" 
+            value="{{currentDish.price}}"
+            bindinput="onDishPriceInput"
+          />
+        </view>
+        <view class="form-item">
+          <view class="form-label">原价<text class="required-mark">*</text></view>
+          <input 
+            class="form-input" 
+            type="digit" 
+            placeholder="请输入原价（不能小于售价，0-10000）" 
+            value="{{currentDish.originalPrice}}"
+            bindinput="onDishOriginalPriceInput"
+          />
+        </view>
+        <view class="form-item">
+          <view class="form-label">描述</view>
+          <textarea 
+            class="form-textarea" 
+            placeholder="请输入菜品描述（最多10个字）" 
+            maxlength="10"
+            value="{{currentDish.description}}"
+            bindinput="onDishDescriptionInput"
+          />
+        </view>
+        <view class="form-item">
+          <view class="form-label">排序</view>
+          <input 
+            class="form-input" 
+            type="number" 
+            placeholder="数字越小越靠前" 
+            value="{{currentDish.sort}}"
+            bindinput="onDishSortInput"
+          />
+        </view>
+        <view class="form-item">
+          <view class="form-label">
+            可参与免单
+            <text class="label-tip">（用户可以用免单次数点这一份菜品）</text>
+          </view>
+          <switch checked="{{currentDish.canUseMiandan}}" bindchange="onCanUseMiandanChange" color="#e54d42"/>
+        </view>
+
+        <!-- 标签管理 -->
+        <view class="form-item">
+          <view class="form-label">
+            菜品标签
+            <text class="label-tip">（用户点餐时可选择）</text>
+          </view>
+          <view class="tags-management">
+            <view class="tag-list" wx:if="{{currentDish.tags.length > 0}}">
+              <view class="tag-card" wx:for="{{currentDish.tags}}" wx:key="id">
+                <view class="tag-card-header">
+                  <view class="tag-card-title">
+                    <text class="tag-name">{{item.name}}</text>
+                    <text class="tag-type">{{item.type === 'single' ? '单选' : '多选'}}</text>
+                    <text class="tag-required" wx:if="{{item.required}}">必选</text>
+                  </view>
+                  <view class="tag-card-actions">
+                    <text class="tag-action-btn edit" bindtap="showEditTagModal" data-index="{{index}}">编辑</text>
+                    <text class="tag-action-btn delete" bindtap="deleteTag" data-index="{{index}}">删除</text>
+                  </view>
+                </view>
+                <view class="tag-options">
+                  <text class="option-item" wx:for="{{item.options}}" wx:key="*this" wx:for-item="option">{{option}}</text>
+                </view>
+              </view>
+            </view>
+            <view class="add-tag-btn" bindtap="showAddTagModal">+ 添加标签</view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="modal-footer">
+        <view class="modal-btn cancel" bindtap="closeDishModal">取消</view>
+        <view class="modal-btn confirm" bindtap="saveDish">保存</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 标签编辑弹窗 -->
+  <view class="modal-mask" wx:if="{{showTagModal}}" catchtap="closeTagModal">
+    <view class="modal-dialog tag-modal" catchtap="stopPropagation">
+      <view class="modal-title">{{editingTagIndex === -1 ? '添加标签' : '编辑标签'}}</view>
+      <scroll-view class="modal-content" scroll-y>
+        <view class="form-item">
+          <view class="form-label">标签名称</view>
+          <input 
+            class="form-input" 
+            placeholder="如：辣度、配料等" 
+            value="{{currentTag.name}}"
+            bindinput="onTagNameInput"
+          />
+        </view>
+        <view class="form-item">
+          <view class="form-label">选择类型</view>
+          <view class="type-selector">
+            <view 
+              class="type-option {{currentTag.type === 'single' ? 'active' : ''}}"
+              bindtap="selectTagType"
+              data-type="single">
+              单选
+            </view>
+            <view 
+              class="type-option {{currentTag.type === 'multiple' ? 'active' : ''}}"
+              bindtap="selectTagType"
+              data-type="multiple">
+              多选
+            </view>
+          </view>
+        </view>
+        <view class="form-item">
+          <view class="form-label">是否必选</view>
+          <switch checked="{{currentTag.required}}" bindchange="onTagRequiredChange" color="#e54d42"/>
+        </view>
+        <view class="form-item">
+          <view class="form-label">选项列表</view>
+          <view class="option-list">
+            <view class="option-item-row" wx:for="{{currentTag.options}}" wx:key="*this">
+              <text class="option-text">{{item}}</text>
+              <text class="option-delete" bindtap="deleteOption" data-index="{{index}}">删除</text>
+            </view>
+          </view>
+          <view class="add-option-row">
+            <input 
+              class="option-input" 
+              placeholder="输入选项内容" 
+              value="{{newOption}}"
+              bindinput="onOptionInput"
+            />
+            <view class="add-option-btn" bindtap="addOption">添加</view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="modal-footer">
+        <view class="modal-btn cancel" bindtap="closeTagModal">取消</view>
+        <view class="modal-btn confirm" bindtap="saveTag">保存</view>
+      </view>
+    </view>
+  </view>
+</view>

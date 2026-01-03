@@ -1,0 +1,30 @@
+<!--pages/admin/shopInfo/shopInfo.wxml-->
+<view class="page">
+  <view class="form-section">
+    <view class="form-item">
+      <view class="form-label">店铺名称</view>
+      <input 
+        class="form-input" 
+        placeholder="请输入店铺名称（最多8个字）" 
+        maxlength="8"
+        value="{{shopInfo.name}}"
+        bindinput="onNameInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">店铺简介</view>
+      <textarea 
+        class="form-textarea" 
+        placeholder="请输入店铺简介（可选）" 
+        value="{{shopInfo.description}}"
+        bindinput="onDescriptionInput"
+      />
+    </view>
+  </view>
+
+  <view class="save-btn" bindtap="saveShopInfo">
+    <text>保存</text>
+  </view>
+</view>
+
